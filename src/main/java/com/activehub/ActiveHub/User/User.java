@@ -18,14 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     int id;
-    @Column(name = "username")
-    String username;
     @Column(name = "lastname")
     String lastname;
     @Column(name = "firstname")
@@ -34,8 +32,9 @@ public class User implements UserDetails {
     String country;
     @Column(name = "password")
     String password;
+    @Basic
     @Column(name = "email")
-    String email;
+    String username;
     @ManyToOne(targetEntity = Role.class)
     @JoinColumn(name = "id_rol", foreignKey = @ForeignKey(name = "users_rol_fkey"))
     Role role;
@@ -49,16 +48,6 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.getName()));
-    }
-
-    @Override
-    public String getPassword() {
-        return "";
-    }
-
-    @Override
-    public String getUsername() {
-        return "";
     }
 
     @Override

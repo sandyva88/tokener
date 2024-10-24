@@ -35,12 +35,11 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request){
 
         User user = User.builder()
-                .username(request.getUsername())
+                .username(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .country(request.getCountry())
-                .email(request.getEmail())
                 .status(true)
                 .creationDate(new Date())
                 .role(roleRepository.findByName("Participante"))
