@@ -1,4 +1,4 @@
-package com.activehub.ActiveHub.User;
+package com.activehub.ActiveHub.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
